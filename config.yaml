@@ -1,0 +1,16 @@
+data_path: "trainingData"
+labels_file: "driving_log.csv"
+skipHeader: True
+useSideImages: True
+correctionFactor: 0.2
+trainValidSplit: 0.2
+doFlip: True
+topCrop: 50
+bottomCrop: 20
+batchSize: 32
+epochs: 3
+loss: "mse"
+optimizer: "adam"
+verbose: 1
+modelName: "model"
+outputDir: "output_images"
