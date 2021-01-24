@@ -73,7 +73,7 @@ class PreprocessData:
                 img_center = os.path.join(directory, "IMG", line[0].split("/")[-1])
                 img_left = os.path.join(directory, "IMG", line[1].split("/")[-1])
                 img_right = os.path.join(directory, "IMG", line[2].split("/")[-1])
-                
+
                 # add images and angles to data set
                 car_images.append(img_center)
                 steering_angles.append(steering_center)

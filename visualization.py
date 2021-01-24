@@ -5,6 +5,7 @@ from collections import defaultdict
 from keras.layers.core import Dense, Flatten, Activation, Dropout
 from keras.layers.convolutional import Convolution2D
 from keras.layers import Lambda, Cropping2D
+import matplotlib.pyplot as plt
 import errno
 
 
@@ -45,3 +46,15 @@ class Visualization():
         file_name = os.path.join(self.output_dir, "model_plot.png")
         check_dir(file_name)
         plot_model(self.model, to_file=file_name, show_shapes=True, show_layer_names=True)
+
+    def save_plots(self, results):
+        # Plot the training and validation loss for each epoch
+        plt.plot(results.history['loss'])
+        plt.plot(results.history['val_loss'])
+        plt.title('model mean squared error loss')
+        plt.ylabel('mean squared error loss')
+        plt.xlabel('epoch')
+        plt.legend(['training set', 'validation set'], loc='upper right')
+        file_name = os.path.join(self.output_dir, "model_history.png")
+        check_dir(file_name)
+        plt.savefig(file_name)

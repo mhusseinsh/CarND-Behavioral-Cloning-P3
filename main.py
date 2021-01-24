@@ -63,9 +63,13 @@ def main():
             visualize = Visualization(model, output_dir)
             visualize.visualize_model()
 
-            summary = network.get_summary(model)
-            print("get_summary")
+            network.get_summary(model)
+
             results = network.train_model(model)
+
+            visualize.save_plots(results)
+
+
 
 
 if __name__ == "__main__":

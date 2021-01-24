@@ -78,7 +78,7 @@ class Model:
         return history_object
 
     def get_summary(self, model):
-        return model.summary()
+        model.summary()
 
     def save_model(self, model):
         ################################################################
