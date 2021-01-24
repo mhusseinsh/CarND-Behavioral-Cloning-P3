@@ -54,11 +54,10 @@ The goals / steps of this project are the following:
 [1lapccwLeft]: ./output_images/left_2021_01_23_21_05_36_624.jpg "Left"
 [1lapccwRight]: ./output_images/right_2021_01_23_21_05_36_624.jpg "Right"
 
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[track1model]: ./output_images/track1model.gif "Track1 Model"
+[track2model]: ./output_images/track2model.gif "Track2 Model"
+[track1model0]: ./output_images/track1model0.gif "Track1 Model0"
+[track2model0]: ./output_images/track2model0.gif "Track2 Model0"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -90,16 +89,20 @@ The scripts are reusable and readable.
 The fact that all the included files in this repo can be easily reused and generalized. 
 This is simply by using the [`config.yaml`](https://github.com/mhusseinsh/CarND-Behavioral-Cloning-P3/blob/master/config.yaml) file which allows the user to define the data path,
 preprocessing and training parameters. Once the user is done with finalizing this file, he can
-simply run the training through `python main.py config.yaml`. The [`main.py`](https://github.com/mhusseinsh/CarND-Behavioral-Cloning-P3/blob/master/main.py) will initialize the 
+simply run the training through `python main.py config.yaml`. 
+
+The [`main.py`](https://github.com/mhusseinsh/CarND-Behavioral-Cloning-P3/blob/master/main.py) will initialize the 
 preprocessing, model, and visualization classes with the predefined parameters in the configurations
 and then will start calling the methods for loading, preprocessing data and then training the network.
 
 The [`preprocess.py`](https://github.com/mhusseinsh/CarND-Behavioral-Cloning-P3/blob/master/preprocess.py) file contains all data loading and preprocessing methods, it also has the option to
 download the data from any external cloud drive using the `wget` which is defined in the shell script
-[`getData.sh`](https://github.com/mhusseinsh/CarND-Behavioral-Cloning-P3/blob/master/getData.sh) if and only if the data is not existing in the directory.
+[`getData.sh`](https://github.com/mhusseinsh/CarND-Behavioral-Cloning-P3/blob/master/getData.sh) if and only if the data is not existing in the directory. It also includes a 
+`python-generator` which generates data for training rather than storing the data in the memory.
 
 The [`model.py`](https://github.com/mhusseinsh/CarND-Behavioral-Cloning-P3/blob/master/model.py) file contains the code for training and saving the convolution neural network.
-The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
+The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works. It also
+calls the `generator` to retrieve training and validation batches.
 
 The [`visualization.py`](https://github.com/mhusseinsh/CarND-Behavioral-Cloning-P3/blob/master/visualization.py) file contains all visualization functions to save the network architecture,
 and loss plots.
@@ -353,7 +356,7 @@ A plot of the training and validation losses is shown below:
 
 ![alt text][modelLoss]
 
-Finally the model outperformed on both tracks with always keeping in the center as shown below:
+Finally the model outperformed on both tracks with always keeping in the center, and not popping up onto ledges or rolling over any surfaces as shown below:
 
 Track 1:
 
