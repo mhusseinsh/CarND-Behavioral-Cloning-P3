@@ -8,6 +8,7 @@ if '/opt/ros/kinetic/lib/python2.7/dist-packages' in sys.path:
 import cv2
 import numpy as np
 from sklearn.utils import shuffle
+import subprocess
 
 
 class PreprocessData:
@@ -41,11 +42,18 @@ class PreprocessData:
                 lines.append(line)
         return lines
 
+    def download_data(self):
+        subprocess.call(['sh', './getData.sh'])
+
     def extract_images(self):
         """
         Finds all the images needed for training on the path `dataPath`.
         Returns `([centerPaths], [leftPath], [rightPath], [measurement])`
         """
+        if os.path.isdir(self.data_path):
+            print("Training data exist")
+        else:
+            print("Downloading Data")
         data_directories = next(os.walk(self.data_path))[1]
         all_car_images = []
         all_steering_angles = []
@@ -65,7 +73,7 @@ class PreprocessData:
                 img_center = os.path.join(directory, "IMG", line[0].split("/")[-1])
                 img_left = os.path.join(directory, "IMG", line[1].split("/")[-1])
                 img_right = os.path.join(directory, "IMG", line[2].split("/")[-1])
-
+                
                 # add images and angles to data set
                 car_images.append(img_center)
                 steering_angles.append(steering_center)
