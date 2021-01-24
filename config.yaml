@@ -8,7 +8,7 @@ doFlip: True
 topCrop: 50
 bottomCrop: 20
 batchSize: 32
-epochs: 3
+epochs: 10
 loss: "mse"
 optimizer: "adam"
 verbose: 1
