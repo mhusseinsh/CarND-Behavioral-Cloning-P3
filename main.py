@@ -65,7 +65,7 @@ def main():
 
             summary = network.get_summary(model)
             print("get_summary")
-            results = network.traicn_model(model)
+            results = network.train_model(model)
 
 
 if __name__ == "__main__":
